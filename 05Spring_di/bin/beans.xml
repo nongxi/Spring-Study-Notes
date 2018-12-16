@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:p="http://www.springframework.org/schema/p" 
+		xmlns:c="http://www.springframework.org/schema/c" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	<!--bean的作用域
+		sington单例，通过寄数器来寄存的；整个容器只有一个实例；
+		prototype原型每次获取bean都产生一个新的对象； 
+		request在请求范围内，每次请求时创建一个新的对象；
+		session（HTTP）在会话范围内时创建一个对象；
+		globe session只在portlet下有用，表示是application；
+		application在应用范围内一个对象；
+		在整合struts2和spring时需要将action设为scope="prototype" ;-->
+  <bean id="addr" class="com.ironxi.vo.Address">
+  	<property name="address" value="北京张家界"/>
+  </bean>
+  <bean id="student" class="com.ironxi.vo.Student">
+  	<property name="student" value="张三丰"/>
+  	<property name="addr" ref="addr"/>
+  	<property name="books">
+  		<array>
+  			<value>张三丰异界游</value>
+  			<value>张异界游</value>
+  			<value>张丰异界游</value>
+  		</array>
+  	</property>
+  	<property name="hobbtis">
+  		<list>
+  			<value>玻璃球</value>
+  			<value>篮球</value>
+  			<value>沙滩球</value>
+  		</list>
+  	</property>
+  	<property name="cards">
+  		<map>
+  		 	<entry key="中国银行" value="612455555"></entry>
+  			<entry>
+  				<key><value>农业银行</value></key>
+  				<value>899999999</value>
+  			</entry>
+  		</map>
+  	</property>
+  	<property name="games">
+  		<set>
+  			<value>LOL</value>
+  			<value>Dota</value>
+  			<value>DNF</value>
+  		</set>
+  	</property>
+  	<!--空注入-->
+  	<property name="wife"><null></null></property>
+  	<property name="info">
+  		<props>
+  			<prop key="学号">201330882033</prop>
+  			<prop key="性别">男</prop>
+  			<prop key="昵称">小强</prop>
+  		</props>
+  	</property>
+  	
+  </bean>
+  
+  <!--P命名空间注入，属性依然需要设置set方法  -->	
+  <bean id="user" class="com.ironxi.vo.User" p:name="风清扬" p:age="233"/>  
+   <!--c命名空间注入，属性依然需要设置set方法  -->	
+  <bean id="u1" class="com.ironxi.vo.User" c:name="nico" c:age="23"/>  
+</beans>		

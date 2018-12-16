@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!--bean是java对象，由spring来创建和管理-->	
+  <!--factory-method在工厂中由那个方法来创建，将方法名写在后面-->
+  <bean id="userFactory" class="com.ironxi.factory.UserDynamicFactory"></bean>
+  <!--factory-bean引用的上面的id="userFactory" 
+  	1.alias为bean设置别名可以设置多个;
+	2.id是bean的标识符唯一的，如果没有配置id则那么默认为标识符；如果配置了id和name则name可以设置多个，跟在id后面设置name="别名"可用逗号或者空格、分号隔开；
+	3.class是bean的全限定名=包名+类名；
+	4.如果不配置id，name，那么可以根据applicationContext.getBean(class)获取对象；
+  -->
+  <bean id="user" name="u2,u3 u4 u5" factory-bean="userFactory" factory-method="newInstance">
+     <constructor-arg index="0" value="张六"/>   
+  </bean>
+  <!--设置别名-->
+  <alias name="user" alias="user1"/>	
+</beans>		

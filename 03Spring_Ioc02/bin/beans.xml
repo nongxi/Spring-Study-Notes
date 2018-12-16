@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!--bean是java对象，由spring来创建和管理-->	
+  <bean id="mysqlDao" class="com.ironxi.dao.impl.UserDaoMysqlImpl"></bean>
+  <bean id="oracleDao" class="com.ironxi.dao.impl.UserDaoOracleImpl"></bean>
+  <!--service层中UserDao没有赋值，必须将setUserDao方法给到它-->
+  <bean name="service" class="com.ironxi.service.impl.UserServiceImpl" >
+  	<!--属性中的姓名比如赋值为set后面跟的东西并将首字母变小，次例子中setUserDao则name="userDao",ref引用对象(对象由spring来创建)-->
+  	<property name="userDao" ref="mysqlDao"/>
+  </bean>
+    <bean name="serviceOracle" class="com.ironxi.service.impl.UserServiceImpl" >
+  	<property name="userDao" ref="oracleDao"/>
+  </bean>		
+</beans>		

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!--bean是java对象，由spring来创建和管理-->	
+  <bean id="h1" name="h2 h3 h4 h5" class="com.ironxi.bean.Hello">
+  	<property name="name" value="张三"/>
+  </bean>
+  <!-- 
+  设置两个此时用getBean(Hello.class)无法获取到对象；
+  <bean id="h8" class="com.ironxi.bean.Hello">
+  	<property name="name" value="强大"/>
+  </bean>	 
+  -->	
+</beans>		

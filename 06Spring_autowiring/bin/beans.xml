@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd" >
+  <!--autowire自动装配，简化spring配置；
+ 	 	buName根据名称（由set方法名去掉开头三个字母"set"来设置；）去查找相应的bean，如果有则装配，如果没有则不装配；
+     	全局配置时，如果每个都这样来设置就会比较麻烦，所以可以在开头加上 default-autowire="byName"类表示都采取自动装配；
+    	byType根据类型来自动装配，不用管bean的id，但是同一种类型的bean只能有一个，建议慎用；
+    	constructor当通过构造器实例化bean时，适用byType的方式装配构造方法；
+    	推荐不使用自动装配，使用annotation；
+    -->
+  <bean id= "mysqlDao" class="com.ironxi.dao.impl.UserDaoMysqlImpl"></bean>
+  <bean name="service" class="com.ironxi.service.impl.UserServiceImpl" autowire="constructor"/>		
+</beans>		
