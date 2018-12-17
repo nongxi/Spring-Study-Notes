@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+				
+		<bean id="userService" class="com.ironxi.impl.UserServiceImpl"/>
+		<bean id="log" class="com.ironxi.log.Log"/>
+		<bean id="share" class="com.ironxi.log.Share"/>
+		<aop:config >
+			<aop:aspect ref="log">
+				<aop:pointcut expression="execurion(* com.ironxi.impl.*.*(..))" id="pointcut"/>
+				<aop:after method="after" pointcut-ref="pointcut"/>
+				<aop:before method="before" pointcut-ref="pointcut"/>
+				
+			</aop:aspect>
+		</aop:config>
+		
+		<aop:config>
+			<aop:aspect ref="share">
+				<aop:pointcut expression="execution(* com.ironxi.impl.*.*(..))" id="pointcut"/>
+				<aop:after-returning method="share" pointcut-ref="pointcut"/>
+			</aop:aspect>
+		</aop:config>
+</beans>		
