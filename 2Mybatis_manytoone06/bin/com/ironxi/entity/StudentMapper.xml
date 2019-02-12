@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ironxi.entity.StudentMapper">
+	<!-- 多对一处理的两种方式：
+		1.按结果嵌套处理；
+		2.按查询嵌套处理；
+	 -->
+	 <!-- 按结果嵌套处理
+	 <select id="getStudents" resultMap="StudentTeacher">
+	 	SELECT s.id sid,s.name sname,s.tid stid,t.id tid,t.name tname FROM public.student s,public.teacher t WHERE s.tid=t.id;
+	 </select>
+	 <resultMap type="Student" id="StudentTeacher">
+	 	<id column="sid" property="id"/>
+	 	<result column="sname" property="name"/>
+	 	关联对象association 关联对象在Student实体类中的属性
+	 	<association property="teacher" javaType="Teacher">
+	 		<id column="tid" property="id"/>
+	 		<result column="tname" property="name"/>
+	 	</association>
+	 </resultMap> -->	
+	   <!-- 按查询嵌套处理--> 
+	 <select id="getStudents" resultMap="StudentTeacher">
+	 	SELECT * FROM public.student;
+	 </select>
+	 <resultMap type="Student" id="StudentTeacher">
+	 	<!-- association关联属性，property属性名，javaType属性的类型，column关联属性在多的一方表格中的列名 -->
+	 	<association property="teacher" column="tid" javaType="Teacher" select="com.ironxi.entity.TeacherMapper.getTeacher"></association>
+	 </resultMap>
+</mapper> 
