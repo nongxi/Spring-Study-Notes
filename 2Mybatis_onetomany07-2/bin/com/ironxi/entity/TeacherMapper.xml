@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ironxi.entity.TeacherMapper">
+	<!-- com.ironxi.entity.TeacherMapper>Teacher>getTeacher -->
+	 <select id="getTeacher" resultMap="TeacherStudent">
+	 	SELECT * FROM public.teacher;
+	 </select>
+	 <resultMap type="Teacher" id="TeacherStudent">
+	 <!-- column是一端对多端的外键也就是一端主键的列名 -->
+	 	<collection property="students"  javaType="ArrayList" ofType="Student" 
+	 	column="id" select="com.ironxi.entity.StudentMapper.getStudentById"></collection>
+	 </resultMap>
+</mapper> 
